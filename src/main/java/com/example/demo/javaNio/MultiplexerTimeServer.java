@@ -52,6 +52,8 @@ public class MultiplexerTimeServer implements Runnable{
 
                     }
                 }
+            }catch (IOException e){
+
             }
         }
     }
