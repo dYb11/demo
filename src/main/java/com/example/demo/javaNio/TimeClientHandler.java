@@ -63,6 +63,7 @@ public class TimeClientHandler implements Runnable{
                 Iterator<SelectionKey> it=selectionKeys.iterator();
                 SelectionKey key=null;
                 while (it.hasNext()){
+
                     key=it.next();
                     it.remove();
                     try{
@@ -78,6 +79,7 @@ public class TimeClientHandler implements Runnable{
                 }
             }catch (Exception e){
                 e.printStackTrace();
+                System.exit(1);
             }
         }
 
@@ -92,33 +94,39 @@ public class TimeClientHandler implements Runnable{
 
 
     private void handleInput(SelectionKey key) throws IOException{
+
+
         if(key.isValid()){
                 SocketChannel sc=(SocketChannel)key.channel();
-            if(key.isConnectable()){
-                if(sc.finishConnect()){
-                    sc.register(selector,SelectionKey.OP_READ);
-                    doWrite(sc);
+
+                if(key.isConnectable()){
+
+                    if(sc.finishConnect()){
+                        sc.register(selector,SelectionKey.OP_READ);
+                        doWrite(sc);
+                    }else
+                        System.exit(1);
                 }
 
-                ByteBuffer readBuffer= ByteBuffer.allocate(1024);
-                int readBytes=sc.read(readBuffer);
-                if(readBytes>0){
-                    readBuffer.flip();
-                    byte[] bytes=new byte[readBuffer.remaining()];
-                    readBuffer.get(bytes);
-                    String body=new String(bytes,"UTF-8");
-                    System.out.println("the time server receive order:"+body);
-                    String currentTime="Query Time order".equalsIgnoreCase(body) ? new java.util.Date(
-                            System.currentTimeMillis()
-                    ).toString():"bad order";
+                if(key.isReadable()){
+                    ByteBuffer readBuffer= ByteBuffer.allocate(1024);
+                    int readBytes=sc.read(readBuffer);
 
-                    doWrite(sc,currentTime);
-                }else if(readBytes<0){
-                    key.cancel();
-                    sc.close();
+                    if(readBytes>0){
+                        readBuffer.flip();
+                        byte[] bytes=new byte[readBuffer.remaining()];
+                        readBuffer.get(bytes);
+                        String body=new String(bytes,"UTF-8");
+                        System.out.println("now is:"+body);
+                        this.stop=true;
+
+                    }else if(readBytes<0){
+                        key.cancel();
+                        sc.close();
+                    }else
+                        ;
                 }
-            }else
-                ;
+
         }
 
     }
@@ -127,8 +135,10 @@ public class TimeClientHandler implements Runnable{
         if(socketChannel.connect(new InetSocketAddress(host,port))){
             socketChannel.register(selector,SelectionKey.OP_READ);
             doWrite(socketChannel);
-        }else
+        }else{
             socketChannel.register(selector,SelectionKey.OP_CONNECT);
+        }
+
     }
 
     private void doWrite(SocketChannel channel) throws IOException{
