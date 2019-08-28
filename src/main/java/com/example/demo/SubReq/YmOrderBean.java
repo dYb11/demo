@@ -2,6 +2,7 @@ package com.example.demo.SubReq;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class YmOrderBean implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -50,4 +51,5 @@ public class YmOrderBean implements Serializable {
                 ", num='" + num + '\'' +
                 '}';
     }
+
 }
