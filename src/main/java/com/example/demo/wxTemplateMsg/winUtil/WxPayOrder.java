@@ -1,8 +1,8 @@
 package com.example.demo.wxTemplateMsg.winUtil;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class WxPayOrder {
 
 	// 商户订单号，商户网站订单系统中唯一订单号，必填

@@ -23,7 +23,7 @@ public class JsapiTicket {
     private static Logger logger = LoggerFactory.getLogger(JsapiTicket.class);
 
 
-    ConcurrentHashMap CacheUtils=new ConcurrentHashMap();
+    private ConcurrentHashMap CacheUtils=new ConcurrentHashMap();
 
     /**
      * 获取获取ticket

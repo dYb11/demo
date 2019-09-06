@@ -24,7 +24,7 @@ import java.net.UnknownHostException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
 
-import static com.thinkgem.jeesite.modules.dh.weixin.winUtil.WXPayConstants.USER_AGENT;
+import static com.example.demo.wxTemplateMsg.winUtil.WXPayConstants.USER_AGENT;
 
 
 public class WXPayRequest {

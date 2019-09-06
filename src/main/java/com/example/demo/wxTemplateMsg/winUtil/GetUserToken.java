@@ -1,6 +1,6 @@
 package com.example.demo.wxTemplateMsg.winUtil;
 
-import com.thinkgem.jeesite.modules.dh.weixin.been.WxAccount;
+import com.example.demo.wxTemplateMsg.been.WxAccount;
 import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
