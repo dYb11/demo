@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 缓存事件
@@ -25,7 +26,7 @@ public class WxEventMsg implements
         InitializingBean {
 
 
-
+    private static ConcurrentHashMap CacheUtils=new ConcurrentHashMap();
     @Autowired
     TemplateUtil templateUtil;
 
@@ -37,7 +38,7 @@ public class WxEventMsg implements
      * @param event 事件名称
      */
     public synchronized static void registerEvent (String event){
-        /*if(CacheUtils.get("event")==null){
+        if(CacheUtils.get("event")==null){
             List list=new ArrayList();
             list.add("模板列表");
             try {
@@ -50,7 +51,7 @@ public class WxEventMsg implements
 
         List list= (List) CacheUtils.get("event");
         list.add(event);
-        CacheUtils.put("event",list);*/
+        CacheUtils.put("event",list);
         //注册事件到缓存
 
     }
