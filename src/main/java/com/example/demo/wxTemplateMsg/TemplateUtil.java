@@ -27,8 +27,8 @@ public class TemplateUtil {
      * @return
      * @throws IllegalAccessException
      */
-    public String getClsData(Class clz, Object data, String name) throws IllegalAccessException {
-        return replaceData(clz,data,"${"+name+"}");
+    public String getClsData(Object data, String name) throws IllegalAccessException {
+        return replaceData(data.getClass(),data,"${"+name+"}");
     }
 
     /**
@@ -39,8 +39,8 @@ public class TemplateUtil {
      * @return
      * @throws IllegalAccessException
      */
-    public String replaceTempateData(Class clz, Object data, String tempate) throws IllegalAccessException {
-        return replaceData(clz,data,tempate);
+    public String replaceTempateData(Object data, String tempate) throws IllegalAccessException {
+        return replaceData(data.getClass(),data,tempate);
     }
 
     private String replaceData(Class clz, Object data, String tempate) throws IllegalAccessException {
@@ -154,43 +154,43 @@ public class TemplateUtil {
         return clsName.substring(clsName.lastIndexOf(".")+1,clsName.length());
     }
 
-    public static void main(String[] args) throws IllegalAccessException {
+    /* public static void main(String[] args) throws IllegalAccessException {
 
-        ShOrders shOrders=new ShOrders();
-        shOrders.setStatus("1");
-        FqMember fqMember=new FqMember();
-        fqMember.setMobile("15681");
+         ShOrders shOrders=new ShOrders();
+         shOrders.setStatus("1");
+         FqMember fqMember=new FqMember();
+         fqMember.setMobile("15681");
 
-        String a="{\"touser\":\"${openId}\",\"template_id\":\"${wxTemplateId}\"," +
-                "\"data\":{\"first\":{\"value\":\"${FqMember.name}\",\"color\":\"\"}," +
-                "\"remark\":{\"value\":\"${ShOrders.amount}\",\"color\":\"\"}," +
-                "\"keyword1\":{\"value\":\"${ShOrders.firstAmount}\",\"color\":\"\"}," +
-                "\"keyword2\":{\"value\":\"${ShOrders.productAmount}\",\"color\":\"\"}," +
-                "\"keyword3\":{\"value\":\"${ShOrders.periodsAmount}\",\"color\":\"\"}," +
-                "\"keyword4\":{\"value\":\"${FqMember.mobile}\",\"color\":\"\"}," +
-                "\"keyword5\":{\"value\":\"${ShOrders.sn}\",\"color\":\"\"}}}";
-        shOrders.setAmount(new BigDecimal("10000"));
-        shOrders.setFirstAmount(new BigDecimal("100"));
-        shOrders.setProductAmount(new BigDecimal("1000000"));
-        shOrders.setPeriodsAmount(new BigDecimal("999999"));
-        shOrders.setSn("23232323223233232");
-        fqMember.setMobile("15681008705");
-        fqMember.setName("啊啊啊");
-        shOrders.setBorrower(fqMember);
-        //String a="${ShOrders.id}";
-        //System.out.println(replaceData(shOrders.getClass(),shOrders,a));
+         String a="{\"touser\":\"${openId}\",\"template_id\":\"${wxTemplateId}\"," +
+                 "\"data\":{\"first\":{\"value\":\"${FqMember.name}\",\"color\":\"\"}," +
+                 "\"remark\":{\"value\":\"${ShOrders.amount}\",\"color\":\"\"}," +
+                 "\"keyword1\":{\"value\":\"${ShOrders.firstAmount}\",\"color\":\"\"}," +
+                 "\"keyword2\":{\"value\":\"${ShOrders.productAmount}\",\"color\":\"\"}," +
+                 "\"keyword3\":{\"value\":\"${ShOrders.periodsAmount}\",\"color\":\"\"}," +
+                 "\"keyword4\":{\"value\":\"${FqMember.mobile}\",\"color\":\"\"}," +
+                 "\"keyword5\":{\"value\":\"${ShOrders.sn}\",\"color\":\"\"}}}";
+         shOrders.setAmount(new BigDecimal("10000"));
+         shOrders.setFirstAmount(new BigDecimal("100"));
+         shOrders.setProductAmount(new BigDecimal("1000000"));
+         shOrders.setPeriodsAmount(new BigDecimal("999999"));
+         shOrders.setSn("23232323223233232");
+         fqMember.setMobile("15681008705");
+         fqMember.setName("啊啊啊");
+         shOrders.setBorrower(fqMember);
+         //String a="${ShOrders.id}";
+         //System.out.println(replaceData(shOrders.getClass(),srders,a));
 
-    }
-    /*
+     }
+     /*
 
-        shOrders.setBorrower(fqMember);
-    //System.out.println(getClsName(shOrders.getClass()));
-    //System.out.println(replaceTempateData(shOrders.getClass(),shOrders,"${FqMember.id}"));
-    Class<?> cls = fqMember.getClass().getSuperclass();
-    Type b = cls.getGenericSuperclass();
-    Type c = cls.getGenericSuperclass();
-        System.out.println(shOrders.getEntityClass());
-        System.out.println(getActualTypeArgument(cls));*/
+         shOrders.setBorrower(fqMember);
+     //System.out.println(getClsName(shOrders.getClass()));
+     //System.out.println(replaceTempateData(shOrders.getClass(),shOrders,"${FqMember.id}"));
+     Class<?> cls = fqMember.getClass().getSuperclass();
+     Type b = cls.getGenericSuperclass();
+     Type c = cls.getGenericSuperclass();
+         System.out.println(shOrders.getEntityClass());
+         System.out.println(getActualTypeArgument(cls));*/
     /*
      * 获取泛型类Class对象，不是泛型类则返回null
      */
@@ -209,4 +209,26 @@ public class TemplateUtil {
     }
 
 
+
+    public void a(Object a){
+        try {
+            System.out.println(getClsData(a,"idNo"));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void b(Class clz,Object b){
+        System.out.println(clz);
+    }
+
+    public static void main(String[] args) {
+        ShOrders shOrders=new ShOrders();
+        TemplateUtil templateUtil=new TemplateUtil();
+        shOrders.setBranchName("adada");
+        FqMember fqMember=new FqMember();
+        fqMember.setIdNo("1312414");
+        shOrders.setFqMember(fqMember);
+        templateUtil.a(shOrders);
+        b(shOrders.getClass(),shOrders);
+    }
 }

@@ -89,7 +89,7 @@ public class WxEventMsg implements
             WxUserEvent wxUserEvent2=null;
             switch (wxTemplate1.getAimUser()){
                 case "2"://用户
-                    String userId = templateUtil.getClsData(clz, data, "FqMember.id");
+                    String userId = templateUtil.getClsData(data, "FqMember.id");
                     if(!userId.contains("FqMember.id")){
                         wxUserEvent2=new WxUserEvent();
 
@@ -100,8 +100,8 @@ public class WxEventMsg implements
             List<WxUserEvent> wxUserEvents=null;//获取数据库中与该模板绑定的用户
             wxUserEvents.add(wxUserEvent2);
             for(WxUserEvent wxUserEvent1:wxUserEvents){
-                String template = templateUtil.replaceTempateData(clz, data, wxTemplate1.getTemplate());
-                template = templateUtil.replaceTempateData(WxUserEvent.class,wxUserEvent1,template);
+                String template = templateUtil.replaceTempateData(data, wxTemplate1.getTemplate());
+                template = templateUtil.replaceTempateData(wxUserEvent1,template);
 
                 wxTemplateMassageUtil.sendMassage(template);//发送推送
             }

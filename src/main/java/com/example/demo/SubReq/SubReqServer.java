@@ -41,9 +41,9 @@ public class SubReqServer {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             socketChannel.pipeline().addLast(new ObjectDecoder(1024*1024, ClassResolvers
-                                    .weakCachingConcurrentResolver(this.getClass().getClassLoader())//序列化解码
+                                    .weakCachingConcurrentResolver(this.getClass().getClassLoader())
                             ));
-                            socketChannel.pipeline().addLast(new ObjectEncoder());
+                            socketChannel.pipeline().addLast(new ObjectEncoder());//序列化解码
                             socketChannel.pipeline().addLast(new SubReqServerHandler());
                         }
                     });
@@ -57,7 +57,7 @@ public class SubReqServer {
 
     }
 
-    /*public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         int port=8080;
 
         if(args!=null && args.length>0){
@@ -68,7 +68,7 @@ public class SubReqServer {
             }
         }
         new SubReqServer().bind(port);
-    }*/
+    }
 
 
     /*public static void main(String[] args) {
@@ -136,7 +136,7 @@ public class SubReqServer {
         }
     }*/
 
-    public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    /*public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
 
         System.setSecurityManager(new SecurityManager());
         SecurityManager q = System.getSecurityManager();
@@ -153,5 +153,5 @@ public class SubReqServer {
         System.out.println(Character.toLowerCase(pk.charAt(0)) + pk.substring(1));
         System.out.println(getClass().getName());
     }
-
+*/
 }

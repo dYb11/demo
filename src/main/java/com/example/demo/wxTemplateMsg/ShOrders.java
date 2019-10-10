@@ -64,6 +64,8 @@ public class ShOrders {
 	private int daili = 0;
 	private Date orderEndDate;//还款截止日期
 
+	FqMember fqMember;
+
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
@@ -396,4 +398,11 @@ public class ShOrders {
 		this.orderEndDate = orderEndDate;
 	}
 
+	public FqMember getFqMember() {
+		return fqMember;
+	}
+
+	public void setFqMember(FqMember fqMember) {
+		this.fqMember = fqMember;
+	}
 }
