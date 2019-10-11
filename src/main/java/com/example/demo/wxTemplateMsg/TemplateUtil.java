@@ -198,7 +198,7 @@ public class TemplateUtil {
         Class<?> entitiClass = null;
         Type genericSuperclass = clazz.getGenericSuperclass();
         if (genericSuperclass instanceof ParameterizedType) {
-            Type[] actualTypeArguments = ((ParameterizedType) genericSuperclass)
+            Type[] actualTypeArguments = ((ParameterizedType)   genericSuperclass)
                     .getActualTypeArguments();
             if (actualTypeArguments != null && actualTypeArguments.length > 0) {
                 entitiClass = (Class<?>) actualTypeArguments[0];

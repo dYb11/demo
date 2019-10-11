@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 缓存事件
  */
 @Component
-public class WxEventMsg implements
+public class WxEventMsg<I> implements
         InitializingBean {
 
 
@@ -67,7 +67,7 @@ public class WxEventMsg implements
      * 事件触发后调用
      */
     @Async
-    public void start(){}
+    public void start(I sn) throws IllegalAccessException {}
 
     /**
      * 发送

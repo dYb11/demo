@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * 订单提交事件
  */
 @Component
-public class SaveOrderEvent extends WxEventMsg {
+public class SaveOrderEvent extends WxEventMsg<String> {
 
 
 
@@ -23,6 +23,7 @@ public class SaveOrderEvent extends WxEventMsg {
     }
 
     @Async
+    @Override
     public void start(String sn) throws IllegalAccessException {
         System.out.println("开始通知");
         WxTemplate wxTemplate=new WxTemplate();
