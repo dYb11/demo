@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 自定义编码器
+ */
 public class NettyMessageEncoder extends MessageToMessageEncoder<NettyMessage>{
 
     MarshallingEncoder marshallingEncoder;

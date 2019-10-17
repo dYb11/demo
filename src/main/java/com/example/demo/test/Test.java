@@ -1,5 +1,6 @@
 package com.example.demo.test;
 
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,12 +12,32 @@ public class Test implements Runnable{
 
     public static void main(String[] args) {
 
-        concurrentHashMap.put("a",0);
+        /*concurrentHashMap.put("a",0);
         for(int i=0;i<10000;i++){
             Test t=new Test();
             new Thread(t,String.valueOf(i)).start();
-        }
+        }*/
 
+        ByteBuffer byteBuffer=ByteBuffer.allocate(88);
+        String val="醴龠";
+        byteBuffer.put(val.getBytes());
+        System.out.println(byteBuffer.remaining());
+
+        byteBuffer.flip();
+        byteBuffer.mark();
+        byte[] varr=new byte[byteBuffer.remaining()];
+        System.out.println(byteBuffer.remaining());
+        byteBuffer.get(varr);
+        String dv=new String(varr);
+
+        System.out.println(dv);
+        byteBuffer.reset();
+        varr=new byte[byteBuffer.remaining()];
+        System.out.println(byteBuffer.remaining());
+        byteBuffer.get(varr);
+        dv=new String(varr);
+
+        System.out.println(dv);
 
     }
     // 在多线程间共享的对象上使用wait

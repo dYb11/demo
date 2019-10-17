@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 自定义解码器
+ */
 public class NettyMessageDecoder extends LengthFieldBasedFrameDecoder {
 
     MarshallingDecoder marshallingDecoder;

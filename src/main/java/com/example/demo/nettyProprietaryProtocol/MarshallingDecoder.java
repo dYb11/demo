@@ -6,6 +6,9 @@ import org.jboss.marshalling.ByteInput;
 import org.jboss.marshalling.Marshaller;
 import org.jboss.marshalling.Unmarshaller;
 
+/**
+ * 使用jboss序列化工具解码
+ */
 import java.io.IOException;
 
 public class MarshallingDecoder {

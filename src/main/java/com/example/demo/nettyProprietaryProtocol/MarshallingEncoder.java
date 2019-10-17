@@ -7,6 +7,9 @@ import org.jboss.marshalling.Marshaller;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+/**
+ * 使用jboss序列化工具编码
+ */
 public class MarshallingEncoder {
     private static final byte[] LENGTH_PLACEHOLDER=new byte[4];
     Marshaller marshaller;
