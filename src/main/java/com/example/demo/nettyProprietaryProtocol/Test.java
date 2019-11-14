@@ -38,12 +38,13 @@ public class Test<T> {
         }
     }
     public static void main(String[] args) throws Exception {
-        test1();
+        test2();
     }
 
     //java nio buff test(DirectByteBuffer在putint过程中对int的操作
     private static void test1() throws Exception {
         ByteBuffer sendBuf1 = ByteBuffer.allocateDirect(10);//获取直接内存buff：使用unsafe方法直接操作内存
+
         sendBuf1.putInt(1);
 
         Class<? extends ByteBuffer> cls = sendBuf1.getClass();
@@ -156,7 +157,7 @@ public class Test<T> {
         ByteBuf sendBuf = Unpooled.directBuffer(10);//直接使用java Buffer的内存地址保存数据，
         sendBuf.writeInt(1);
         sendBuf.writeInt(2);
-        sendBuf.writeLong(3);
+        sendBuf.writeLong(3);//write操作不改变ByteBuffer的pos值
 
         Field unsafeField = Unsafe.class.getDeclaredField("theUnsafe");//获取unsafe方法用于直接操作内存
         unsafeField.setAccessible(true);
@@ -164,7 +165,7 @@ public class Test<T> {
         System.out.println(UNSAFE);
         Field addressField = Buffer.class.getDeclaredField("address");
         //ByteBuffer b=ByteBuffer.allocateDirect(255);
-        ByteBuffer b=sendBuf.nioBuffer();
+        ByteBuffer b=sendBuf.nioBuffer();//获取ByteBuffer时设置操作位
         //System.out.println(b.getInt());
 
         long aLong = UNSAFE.getLong(b, UNSAFE.objectFieldOffset(addressField));
@@ -175,13 +176,13 @@ public class Test<T> {
 
         b.putInt(12132);
 
-         UNSAFE.putInt(aLong+1, 12333);
+         //UNSAFE.putInt(aLong+1, 12333);
         //UNSAFE.putInt(123,aLong+1, 123);
         System.out.println("----------");
         //System.out.println(sendBuf.readInt());
         //System.out.println(sendBuf.readInt());
         //sendBuf.discardReadBytes();
-        System.out.println(UNSAFE.getInt(aLong+1));
+        System.out.println(Integer.reverseBytes(UNSAFE.getInt(aLong)));
     }
 
 }
