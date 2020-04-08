@@ -15,7 +15,7 @@ public class SubReqServerHandler extends ChannelHandlerAdapter {
 
     private int count;
 
-    @Override
+    //@Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
 
@@ -25,7 +25,7 @@ public class SubReqServerHandler extends ChannelHandlerAdapter {
         ctx.writeAndFlush(new YmOrderRespBean(body.getNum(),"保存成功"));
     }
 
-    @Override
+    //@Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         ctx.flush();
     }

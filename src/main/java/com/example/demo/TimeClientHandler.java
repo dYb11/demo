@@ -20,7 +20,7 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
 
     }
 
-    @Override
+    //@Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         ByteBuf firstmessage=null;
         for(int i=0;i<100;i++){
@@ -32,7 +32,7 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
 
     }
 
-    @Override
+    //@Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         /*ByteBuf buf= (ByteBuf) msg;
 

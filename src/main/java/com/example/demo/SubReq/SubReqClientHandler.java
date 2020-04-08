@@ -11,7 +11,7 @@ public class SubReqClientHandler extends ChannelHandlerAdapter {
 
     private  static final Logger logger=Logger.getLogger(SubReqClientHandler.class.getName());
 
-    @Override
+    //@Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
         for(int i=0;i<10;i++){
@@ -21,7 +21,7 @@ public class SubReqClientHandler extends ChannelHandlerAdapter {
         ctx.flush();
     }
 
-    @Override
+    //@Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         YmOrderRespBean body = (YmOrderRespBean) msg;
         System.out.println("now is:"+body.toString());
